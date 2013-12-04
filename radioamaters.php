@@ -27,6 +27,32 @@ class radioamaters{
     }
 
     /**
+     * Upraví frekvenci
+     * @param String $freg frequency
+     * @return String frequency 
+     */
+    function frekvence( $freg ) {
+        $cislo = explode(".", $freg);
+        $pocet = strlen($cislo[1]);
+        if($pocet == 0) {
+            $num = "0000";
+        }
+        if($pocet == 1) {
+            $num = "000";
+        }
+        if($pocet == 2) {
+            $num = "00";
+        }
+        if($pocet == 3) {
+            $num = "0";
+        }
+        if($pocet == 4) {
+            $num = "";
+        }
+        return $cislo[0].".".$cislo[1].$num;
+    }
+
+    /**
      * Ověření koncese na ČTU webu.
      * @param String $callname callname
      * @return Array data ČTU

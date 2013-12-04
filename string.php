@@ -63,4 +63,73 @@ class string{
         return $data;
     }
 
+    /**
+     * Odstranění diaktritiky z řetězce
+     * @param String $puvodni string
+     * @return String un-diakritiky
+     */
+    function stringconvert( $puvodni ) {
+        $prevedeno = StrTr($puvodni, "áäčďéěëíňóöřšťúůüýžÁÄČĎÉĚËÍŇÓÖŘŠŤÚŮÜÝŽ", "aacdeeeinoorstuuuyzAACDEEEINOORSTUUUYZ");
+        return $prevedeno;
+    }
+
+    /**
+     * Vytvoření modrewrite z vloženého textu ideální na title
+     * @param String $str title řetězec
+     * @return String vrací řetězec bez diakritiky
+     */
+    function to_modrew( $str ) {
+        $str = stripslashes(chop($str));
+        $rep_table = array(
+           "ě" => "e",
+           "š" => "s",
+           "č" => "c",
+           "ř" => "r",
+           "ž" => "z",
+           "ý" => "y",
+           "á" => "a",
+           "í" => "i",
+           "é" => "e",
+           "ú" => "u",
+           "ů" => "u",
+           "ť" => "t",
+           "ď" => "d",
+           "ó" => "o",
+           "ň" => "n",
+           "Ě" => "E",
+           "Š" => "S",
+           "Č" => "C",
+           "Ř" => "R",
+           "Ž" => "Z",
+           "Ý" => "Y",
+           "Á" => "a",
+           "Í" => "I",
+           "É" => "E",
+           "Ú" => "U",
+           "Ů" => "U",
+           "Ó" => "O",
+           "Ď" => "D",
+           "Ť" => "T",
+           "Ň" => "N",
+           "ľ" => "l",
+           "-" => "_",
+           " " => "_"
+        );
+        $str = stripslashes($str);
+        foreach($rep_table as $what => $to) {
+            $str = str_replace($what, $to, $str);
+        }
+        return $str;
+    }
+
+    /**
+     * Zjištění délky slova s ošetřením BUGU diakritickým
+     * @param string $word
+     * @return int length 
+     */
+    public static function length( $word ) { 
+        $output = utf8_decode($word);
+        return strlen($output);
+    }
+
 }
